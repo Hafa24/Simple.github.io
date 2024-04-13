@@ -2,174 +2,274 @@
 <html>
 <head>
 <title></title>
+  <link rel="stylesheet/text" href="chatapp.css">
 <style type="text/css">
-body {
-height:100vh;
-padding:0;
+*{
 margin:0;
-display:flex;
-align-items:center;
-justify-content: center;
-background:#ccc;
-}
-#clock{
-background:#282828;
-position:relative;
-height:80vw;
-width:80vw;
-border:10px solid #202020;
-box-shadow:inset 1px 1px 5px #fff,1px 1px 5px #555;
-border-radius:50%;
-padding:1rem;
-display:flex;
-align-items:center;
+padding:0;
 justify-content:center;
 }
-#clockinner{
-position:relative;
-background:#282828;
-overflow:hidden;
+body{
+background:linear-gradient(90deg,rgb(50,50,190),rgb(50,10,250),rgb(60,20,190));
+justify-content:center;
+  width:100%;
+  height:90vh;
+  
+}
+.person-selector {
+margin:2%;
+display:flex;
+width:95%;
+background:;
+gap:1rem;
+text-align:center;
+
+justify-content:center;
+}
+.personOne,.personTwo {
 width:100%;
-height:100%;
-border-radius:100%;
+padding:10px;
+background:none;
+border:2px solid red;
+color:#fff;
+  
 }
-#clockinner::after {
--webkit-transform: rotate(90deg);
--maz-transform:rotate(90deg);
-transform:rotate(90deg);
+  
+.active-bg{
+background:dodgerblue;
+border:2px solid #fff;
 }
-#clockinner::after,
-#clockinner::before,
-#clockinner .marking{
-content:'';
-position:absolute;
-width:5px;
-height:100%;
-background:#3ff1f0;
-z-index:0;
-left:49%;
-top:0%;
+.message {
+padding:10px 10px ;
+height:60vh;
+  padding-bottom:70px;
+  overflow:scroll;
+  bottom:60px;
+margin:5px 5px 5px 5px;
+background:powderblue;
 }
-#clockinner .marking {
-background:#bdbdcb;
-width:3px;
+.message-header {
+font-size:25px;
+  color:#555
 }
-#clockinner .marking.marking-one {
--webkit-transform :rotate(30deg);
--maz-transform:rotate(30deg);
-transform:rotate(30deg);
+.chat-input-form {
+width:85%;
+  margin:5%;
+padding:10px;
+background:#4af4;
 }
-#clockinner .marking.marking-two {
--webkit-transform :rotate(60deg);
--maz-transform:rotate(60deg);
-transform:rotate(60deg);
-}
-#clockinner .marking.marking-three {
--webkit-transform :rotate(120deg);
--maz-transform:rotate(120deg);
-transform:rotate(120deg);
-}
-#clockinner .marking.marking-four {
--webkit-transform :rotate(150deg);
--maz-transform:rotate(150deg);
-transform:rotate(150deg);
-}
-.clockface {
-position:absolute;
-top:10%;
-left:10%;
+ 
+  .typing-box{
+    padding:10px;
+    border:1px solid blue;
+    outline:none;
+    color:blue
+  }
+  .sendbtn{
+    padding:10px;
+    width:30%;
+    border:1px solid blue;
+    color:blue
+  }
+  .sendbtn:active{
+    transform:scale(0.95);
+    opacity:0.5
+  }
+  
+  .message-body-john{
+    width:80%;
+    float:right;
+    background:dodgerblue;
+    color:#fff;
+    padding:10px;
+    border-radius:20px;
+    
+  }
+  
+   .message-footer-john{
+     display:flex;
+     margin-bottom:30px;
+     color:#115;
+     float:right;
+     justify-content:right;
+     width:50%;
+     font-size:12px;
+   }
+  
+   .message-body-melu{
+     width:80%;
+    background:skyblue;
+     color:#333;
+     float:left;
+     padding:10px;
+     border-radius:20px;
+     
+   }
+   .message-footer-melu{
+   color:#115;
+     display:flex;
+     float:left;
+     justify-content:left;
+     width:100%;
+     text-align:right;
+    font-size:12px;
+     margin-bottom:30px;
+   }
+  
+  @media (min-width:560px){
+    body{
+      margin:0 0%;
+      width:100%;
+      height:100vh;
+      font-size:55px
+    }
+    .message {
+padding:60px 70px;
+    }
+      .message-footer-melu, .message-footer-john{
+   
+     font-size:28px;
+     margin-bottom:60px;
+   }
+    .chat-input-form {
 width:80%;
-height:80%;
-background:#282828;
--webkit-border-radius:100%;
--maz-border-radius:100%;
-border-radius:100%;
-z-index:1;
+  margin:5%;
+padding:40px;
+background:#4af4;
 }
-#inner {
-position:absolute;
-top:50%;
-left:50%;
-width:16px;
-height:16px;
-border-radius:18px;
-margin-left:-9px;
-margin-top:-6px;
-background:#4d4b63;
-z-index:11;
-}
-#hour,#minute ,#second  {
-position:absolute;
-border-radius:10px;
-transform-origin:bottom;
-z-index:5;
-}
-#hour {
-background:#6ba6f6;
-width:2.4%;
-height:25%;
-top:26%;
-left:48.85%;
-opacity:0.8;
-}
-#minute  {
-background:#6ba6f6;
-width:2%;
-height:40%;
-top:10%;
-left:48.9%;
-opacity:0.8;
-}
-#second  {
-background:#aa7c51;
-width:1.6%;
-height:40%;
-top:10%;
-left:49.25%;
-opacity:0.8;
-}
+    .typing-box{
+    padding:30px;
+    border:1px solid blue;
+    outline:none;
+    color:blue;
+      width:55%;
+      font-size:55px
+  }
+  .sendbtn{
+    padding:30px;
+    width:30%;
+    border:1px solid blue;
+    color:blue;
+    font-size:55px
+  }
+  }
 </style>
 </head>
 <body>
-<div id="clock" >
-<div id="clockinner" >
-	<div class="marking marking-one" ></div>
-	<div class="marking marking-two" ></div>
-	<div class="marking marking-three" ></div>
-	<div class="marking marking-four" ></div>
-	
-	<div class="clockface" ></div>
-	
-	<div id="inner" ></div>
-	
-	<div id="hour" ></div>
-	<div id="minute" ></div>
-	<div id="second" ></div>	
-</div>	
+<div class="person-selector" >
+	 <div class=" personOne active-bg" >John</div>
+	 <div class=" personTwo" >Melu</div>
 </div>
 
+<div class="message" >
+ 	<div class="message-header" >John chating</div>
+	 
+  <div class="message-body-john" >hey</div>
+	 <div class="message-footer-john" >10:22 AM</div>
+  
+  <div class="message-body-melu" >hey</div>
+	 <div class="message-footer-melu" >10:22 AM</div>
 
-<script type="text/javascript">
-
-let hour = document.getElementById("hour");
-let minute = document.getElementById("minute");
-let second = document.getElementById("second");
-setInterval(()=>{
-d=new Date()
-hr = d.getHours()
-min = d.getMinutes()
-sec = d.getSeconds()
-hr_rotation = 30 * hr + min / 2;
-min_rotation = 6 * min;
-sec_rotation = 6 * sec;
-
-hour.style.transform = `rotate(${hr_rotation}deg)`;
-minute.style.transform = `rotate(${min_rotation}deg)`;
-second.style.transform = `rotate(${sec_rotation}deg)`;
-},1000);
-
-
-
-</script>
+</div>
+  
+<div class="chat-input-form" >
+<input class="typing-box" placeholder="type here...">
+<button class="sendbtn">Send</button>
+</div>
 </body>
+<script src="js/chatapp.js">
+
+const personSelector = document.querySelector('.person-selector');
+const personOne = document.querySelector('.personOne');
+const personTwo= document.querySelector('.personTwo');
+const messageHeader = document.querySelector('.message-header');
+const sendbtn = document.querySelector('.sendbtn');
+const message = document.querySelector('.message');
+const input = document.querySelector('.typing-box');
+window.onload =()=>{
+    message.scrollTop = message.scrollHeight -message.clientHeight
+    
+   // alert("hf")
+}
+
+//const personSelector = document.querySelector('.person-selector');
+
+
+personSelector.addEventListener('click',function chatername(name){
+    if(name.target == personOne){
+        personOne.classList.add('active-bg')
+        personTwo.classList.remove('active-bg')
+    messageHeader.innerText = personOne.innerText +" Chating"
+        messageSender = "john"
+        
+    }else{
+        
+        personTwo.classList.add('active-bg')
+    personOne.classList.remove('active-bg')
+      messageHeader.innerText = personTwo.innerText + " Chating"
+        messageSender = "melu"
+    }
+     
+})
+
+const newMessage = {
+        messageSender:name,
+        text:input.value,
+    }
+input.oninput =()=>{
+    timestamp = new Date().toLocaleString('en-us',{hour:'numeric',minute:'numeric',second:'numeric',hour12:true})
+
+   // alert(timestamp)
+}
+
+
+// sending new messages
+
+sendbtn.onclick = ()=>{
+    
+    if(messageSender== "john"){
+    message.innerHTML += `<div class="chats" oncontextmenu="del(this)"><div class="message-body-john"  >`+input.value+`</div>
+	 <div class="message-footer-john" >`+timestamp+`</div>`
+    }
+    else{
+        message.innerHTML += `<div class="chats" oncontextmenu="del(this)">`
+        +
+       ` <div class="message-body-melu"  >`+input.value+`</div>`+
+	`<div class="message-footer-melu" >`+timestamp+`</div></div></div>`
+   
+    }
+    message.scrollTop = message.scrollHeight-message.clientHeight
+    input.value =""
+    savechat()
+}
+const messageBody = document.querySelector('.message-body-john') 
+
+
+
+
+
+function del(e){
+ row = e;
+    row.remove(row)
+   // document.querySelector('.message-body-melu') .remove(e)
+  //  document.querySelector('.message-footer-melu') .remove(this)
+    savechat()
+}
+
+getchat()
+//saving messages
+
+function savechat(){
+    localStorage.setItem('chats',message.innerHTML)
+}
+
+function getchat(){
+  message.innerHTML =  localStorage.getItem('chats')
+}
+function getchat(){
+  message.innerHTML =  localStorage.getItem('chats')
+}
+//localStorage.clear()
+</script>
+
 </html>
